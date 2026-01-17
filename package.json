@@ -1,0 +1,67 @@
+{
+  "name": "icon-library",
+  "version": "1.0.0",
+  "description": "icon library package/view",
+  "keywords": [
+    "react",
+    "storybook",
+    "mui"
+  ],
+  "homepage": "https://github.com/NaokiSai/icon-library#readme",
+  "bugs": {
+    "url": "https://github.com/NaokiSai/icon-library/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NaokiSai/icon-library.git"
+  },
+  "license": "UNLICENSED",
+  "author": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "preicons:convert": "rimraf src/components/icons",
+    "icons:convert": "svgr --out-dir src/components/icons --typescript --icon --svgo-config .svgo.json raw/icons",
+    "icons:index": "node scripts/generate-index.mjs",
+    "icons:build": "npm run preicons:convert && npm run icons:convert && npm run icons:index",
+    "storybook": "storybook dev -p 6006",
+    "build": "npm run icons:build && vite build"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.7",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.1.3",
+    "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.57.0",
+    "@storybook/addon-a11y": "^10.1.10",
+    "@storybook/addon-docs": "^10.1.10",
+    "@storybook/addon-onboarding": "^10.1.10",
+    "@storybook/addon-vitest": "^10.1.10",
+    "@storybook/react-vite": "^10.1.10",
+    "@storybook/test-runner": "^0.24.2",
+    "@svgr/cli": "^8.1.0",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "@vitest/browser-playwright": "^4.0.16",
+    "@vitest/coverage-v8": "^4.0.16",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "eslint-plugin-storybook": "^10.1.10",
+    "globals": "^16.5.0",
+    "playwright": "^1.57.0",
+    "storybook": "^10.1.10",
+    "svgo": "^4.0.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vite": "^7.2.4",
+    "vitest": "^4.0.16"
+  }
+}
