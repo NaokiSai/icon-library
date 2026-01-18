@@ -1,6 +1,11 @@
 name: Build Icon
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'raw/icons/**'
   workflow_dispatch:
     inputs:
       icon_name:
