@@ -41,7 +41,10 @@ jobs:
       - name: Build Storybook
         run: npm run build-storybook
 
-      - name: Deploy Storybook
-        run: npx gh-pages -d storybook-static
-        env:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: storybook-static
+
+      - name: Deploy to Pages
+        uses: actions/deploy-pages@v3
