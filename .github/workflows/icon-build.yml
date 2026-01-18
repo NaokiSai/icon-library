@@ -22,8 +22,15 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build Single Icon
-        run: npm run icons:build-single
+      - name: Check for New Icons
+        run: |
+          git diff --name-only HEAD^ HEAD | grep 'raw/icons/' > new_icons.txt
+          if [ -s new_icons.txt ]; then
+            while read icon; do
+              icon_name=$(basename "$icon")
+              npm run icons:build-single --icon_name="$icon_name"
+            done < new_icons.txt
+          fi
 
       - name: Build Storybook
         run: npm run build
