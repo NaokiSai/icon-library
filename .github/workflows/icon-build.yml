@@ -1,0 +1,32 @@
+name: Build Icon
+
+on:
+  workflow_dispatch:
+    inputs:
+      icon_name:
+        description: 'Name of the icon to build'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 'latest'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Single Icon
+        run: npm run icons:build-single
+
+      - name: Build Storybook
+        run: npm run build
+
+      - name: Deploy Storybook
+        run: npx gh-pages -d storybook-static
