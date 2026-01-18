@@ -23,10 +23,11 @@
     "preicons:convert": "rimraf src/components/icons",
     "icons:convert": "svgr --out-dir src/components/icons --template template.cjs --typescript --icon --svgo-config .svgo.json raw/icons",
     "icons:index": "node scripts/generate-index.mjs",
-    "icons:build-single": "npm run preicons:convert && svgr --out-dir src/components/icons --template template.cjs --typescript --icon --svgo-config .svgo.json raw/icons/${{ github.event.inputs.icon_name }} && npm run icons:index",
-    "icons:build": "npm run icons:build",
+    "icons:build-single": "npm run preicons:convert && svgr --out-dir src/components/icons --template template.cjs --typescript --icon --svgo-config .svgo.json raw/icons && npm run icons:index",
+    "icons:build": "npm run preicons:convert && npm run icons:convert && npm run icons:index",
     "storybook": "storybook dev -p 6006",
-    "build": "npm run icons:build && vite build"
+    "build-storybook": "storybook build",
+    "build": "npm run icons:build && npm run build-storybook"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

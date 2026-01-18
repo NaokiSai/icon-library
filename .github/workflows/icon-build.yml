@@ -27,18 +27,21 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Check for New Icons
+      - name: Build Changed Icons
         run: |
-          git diff --name-only HEAD^ HEAD | grep 'raw/icons/' > new_icons.txt
-          if [ -s new_icons.txt ]; then
-            while read icon; do
-              icon_name=$(basename "$icon")
-              npm run icons:build-single --icon_name="$icon_name"
-            done < new_icons.txt
+          git diff --name-only HEAD^ HEAD | grep 'raw/icons/' > /tmp/changed_icons.txt || true
+          if [ -s /tmp/changed_icons.txt ]; then
+            echo "Changed icons detected:"
+            cat /tmp/changed_icons.txt
+            npm run icons:build
+          else
+            echo "No icon changes detected"
           fi
 
       - name: Build Storybook
-        run: npm run build
+        run: npm run build-storybook
 
       - name: Deploy Storybook
         run: npx gh-pages -d storybook-static
+        env:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
